@@ -1,0 +1,20 @@
+{% extends 'base_template.html' %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item active">Commodity Tracker</li>
+{% endblock %}
+
+
+{% block content %}
+            <h1>Welcome to The CEO Suite Home Page</h1>
+        
+        <a href="{% url 'commodity-index' %}">Commodity Tracker</a> <br>
+        <a href="{% url 'boards-index' %}">Board</a> <br>
+{%endblock%}
+
+{% block footer %}
+    Home Footer
+{%endblock%}
+
+{% block javascript %}
+{% endblock %}

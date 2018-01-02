@@ -1,0 +1,31 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+   <h3>Commodity List</h3>
+
+   {% if commodity_list %}
+
+    <table class="table" >
+        <thead class= "thead-inverse" >
+        <tr>
+          <th>Commodity Name</th>
+          <th>Commodity id</th>
+        </tr>
+        </thead>
+        
+        <tbody>
+            {% for commodity in commodity_list %}
+            <tr>
+              <td><a href="{% url 'commodity-detail' commodity.id %}">{{ commodity }}</a></td>
+              <td class="align-middle"> {{commodity.id}} </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+
+    {% else %}
+      <p>There are no commodities!</p>
+    {% endif %}       
+{% endblock %}
+
+

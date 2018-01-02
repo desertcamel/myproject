@@ -1,0 +1,37 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+
+<script>
+        google.load("visualization", "1", {packages:["table", "corechart"]});
+        google.setOnLoadCallback(drawTable);
+        function drawTable() {
+
+        var json_table_my = new google.visualization.Table(document.getElementById('table_div_json'));
+        var json_data_my = new google.visualization.DataTable({{dataset|safe}});
+        json_table_my.draw(json_data_my, {showRowNumber: true});
+
+
+        var json_table_my2 = new google.visualization.LineChart(document.getElementById('chart_div_json'));
+        var json_data_my2 = new google.visualization.DataTable({{dataset|safe}});
+        json_table_my2.draw(json_data_my2, {showRowNumber: true});
+        }
+</script>
+
+  <h3>Title: {{ commodity }}</h3>
+
+  <p><strong>commodity:</strong> {{ commodity }}</p> <!-- author detail link not yet defined -->
+
+
+
+    <H1>Chart created using ToJSon</H1>
+    <div id="chart_div_json"></div>
+
+    <H1>Table created using ToJSon</H1>
+    <div id="table_div_json"></div>
+
+{% endblock %}
+
+
+

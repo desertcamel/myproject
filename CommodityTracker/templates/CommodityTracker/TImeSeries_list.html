@@ -1,0 +1,19 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h3>TimeSeries List</h3>
+
+    {% if timeseries_list %}
+    <table>
+
+      {% for ts in timeseries_list %}
+      <tr>
+        <td>{{ ts.commodity }}</td>  <td>{{ ts.date }}</td> <td> {{ ts.value }} </td>
+      </tr>
+      {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no timeseries!</p>
+    {% endif %}       
+{% endblock %}
