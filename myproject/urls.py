@@ -19,19 +19,21 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import RedirectView
 
+from idealytix import views as idealytix_views
 from CommodityTracker import views as commodity_views
 from boards import views as boards_views
 
 #URL pattern mappings
 
 urlpatterns = [
-    url(r'^$', commodity_views.home, name='home'),
+    url(r'^$', idealytix_views.home, name='home'),
 ]
 
 urlpatterns += [
     url(r'^commodity/', include('CommodityTracker.urls')),
     url(r'^forums/', include('boards.urls')),    
     url(r'^accounts/', include('accounts.urls')),    
+    url(r'^bakery/', include('idealytix.urls')),
 ]
 
 #Add Django site authentication urls (for login, logout, password management)

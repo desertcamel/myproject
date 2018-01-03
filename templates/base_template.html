@@ -57,15 +57,20 @@
       </div>
     </main>
     
-    <footer>
-      <div class="container">
+    <footer class="w3-center w3-light-grey w3-padding-16 w3-large">
+        <div class="container">
         {% block footer %}
-        ... default footer ...
+          <p></p>
+          <h5>iDEALytix</h5>
+          <p>Powered by <a href="www.biznessanalytics.com" title="iDEALytix" target="_blank" class="w3-hover-text-green">iDEALytix</a></p>
         {% endblock footer %}
       </div>
     </footer>
+
+
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="{% static 'js/app.js' %}"></script>
+
   </body>
 {% endblock body %}
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>

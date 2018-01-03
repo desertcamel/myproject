@@ -24,20 +24,22 @@ def home(request):
     logger.debug('#### LOGGER #### DISPLAY HOME PAGE#######')
     return render( request, 'home.html',)
 
+def PurchasingIndexView(request):
+    return render( request, 'CommodityTracker/purchasing_index_home.html',)
 
 def index(request):
-    """
-    View function for home page of site.
-    """
-    # Generate counts of some of the main objects
-    
-    # Render the HTML template index.html with the data in the context variable.
-    return render( request, 'index.html',)
+    return render( request, 'CommodityTracker/commodity_index.html',)
+
+
+def CommodityBenchmarkView(request, base_pk, bench_pk):
+    return render( request, 'CommodityTracker/commodity_benchmark.html',)
+
 
 # Company
 @method_decorator(login_required, name='dispatch')
-class CategoryListView(generic.ListView):
+class CommodityListView(generic.ListView):
     model = Category
+    template_name = 'CommodityTracker/commodity_list.html'
 
     def get_queryset(self):
         return Category.objects.all().order_by('name')
@@ -49,7 +51,11 @@ class CategoryDetailView(generic.DetailView):
 @method_decorator(login_required, name='dispatch')
 class CategoryCreateView(generic.CreateView):
     model = Category
+    success_url = reverse_lazy('commodities-list')
+    template_name = 'CommodityTracker/category_create.html'
     fields = '__all__'
+
+
 
 @method_decorator(login_required, name='dispatch')
 class CommodityCreateView(generic.DetailView):
@@ -65,13 +71,6 @@ import gviz_api
 from datetime import datetime
 from datetime import date
 import quandl
-
-@method_decorator(login_required, name='dispatch')
-class CommodityListView(generic.ListView):
-    model = Commodity
-
-    def get_queryset(self):
-        return Commodity.objects.all().order_by('name')
 
 
 def download_quandl_data(commodity):
@@ -138,21 +137,6 @@ def CommodityDetailView(request, pk):
     # Render the HTML template index.html with the data in the context variable.
     return render(request, template, context)
 
-# Company
-@method_decorator(login_required, name='dispatch')
-class APISourceListView(generic.ListView):
-    model = APISource
-
-    def get_queryset(self):
-        return APISource.objects.all().order_by('name')
-
-# Company
-@method_decorator(login_required, name='dispatch')
-class TimeSeriesListView(generic.ListView):
-    model = TimeSeries
-
-    def get_queryset(self):
-        return TimeSeries.objects.all()
 
 
 # SUGGESTIONS

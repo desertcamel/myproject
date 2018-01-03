@@ -1,31 +1,60 @@
 {% extends "base_template.html" %}
+{% load widget_tweaks %}
+
+{% block title %}
+   {{block.super}}: Categories List
+{% endblock title %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{% url 'bakery-portal-index' %}">Home</a></li>
+<li class="breadcrumb-item active">Category</li>
+<li class="breadcrumb-item"><a href="#">Commodities</a></li>
+{% endblock breadcrumb %}
 
 {% block content %}
-   <h3>Commodity List</h3>
 
-   {% if commodity_list %}
+  <div class="mb-4">
+    <a href="{% url 'new-category' %}" class="btn btn-primary">New Category</a>
+  </div>
 
-    <table class="table" >
-        <thead class= "thead-inverse" >
+  {% if category_list %}
+  <table class="table table-striped mb-4">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Category</th>
+        <th>Commodity</th>
+        <th>Description</th>
+        <th>API Sources</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in category_list %}
+      {% url 'category-detail' category.pk as category_url %}
         <tr>
-          <th>Commodity Name</th>
-          <th>Commodity id</th>
+          <td>
+            <p class="mb-0">
+              <a href="#">{{ category.name }}</a>
+            </p>
+          </td>
+          <td>Commodity</td>
+          <td>Description</td>
+          <td>API Sources</td>
         </tr>
-        </thead>
-        
-        <tbody>
-            {% for commodity in commodity_list %}
-            <tr>
-              <td><a href="{% url 'commodity-detail' commodity.id %}">{{ commodity }}</a></td>
-              <td class="align-middle"> {{commodity.id}} </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        </table>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    {% else %}
-      <p>There are no commodities!</p>
+  {% else %}
+      <p>There are no categories!</p>
     {% endif %}       
-{% endblock %}
+
+{% endblock content %}
+
+{% block footer %}
+
+{{block.super}}
+{% endblock footer %}
+
+
 
 
